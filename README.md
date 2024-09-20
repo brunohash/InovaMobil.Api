@@ -1,0 +1,1 @@
+O projeto InovaMobil.Api utiliza um banco de dados que foi disponibilizado no arquivo database.cs, após importa-lo basta remover da aplicação e buildar o projeto. O Front-end Inovamobil-flutter já está configurado para bater no micro-serviço.
