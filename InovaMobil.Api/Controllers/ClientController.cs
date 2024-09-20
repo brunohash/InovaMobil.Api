@@ -23,17 +23,17 @@ public class ClientController : ControllerBase
     {
         if (string.IsNullOrEmpty(client.Name))
         {
-            return BadRequest("O nome do cliente precisa ser preenchido");
+            return BadRequest(new { message = "O nome do cliente precisa ser preenchido" });
         }
 
         var result = await _clientBusiness.CreateClient(client);
 
         if (result == null || string.IsNullOrEmpty(result.Name))
         {
-            return BadRequest("Não foi possível realizar a criação do cliente");
+            return BadRequest(new { message = "Não foi possível realizar a criação do cliente" });
         }
 
-        return Ok($"Cliente criado com sucesso - {result}");
+        return Ok(new { message = $"Cliente criado com sucesso - {result}" });
     }
 
     [HttpGet]

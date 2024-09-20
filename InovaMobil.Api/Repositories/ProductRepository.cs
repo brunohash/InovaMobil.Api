@@ -3,7 +3,6 @@ using Dapper;
 using System.Data;
 using InovaMobil.Api.Domain;
 using InovaMobil.Api.Repositories.Interfaces;
-using MySqlX.XDevAPI.Common;
 
 namespace InovaMobil.Api.Repositories
 {
@@ -56,6 +55,45 @@ namespace InovaMobil.Api.Repositories
             catch(Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while creating product");
+                throw;
+            }
+        }
+
+        public async Task<ProductDto> GetWithUuid(string id)
+        {
+            try
+            {
+                using var connection = CreateConnection();
+
+                var query = @"SELECT * FROM products WHERE Uuid = @uuid";
+
+                var result = await connection.QueryFirstOrDefaultAsync<ProductDto>(query, new { Uuid = id });
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating sales");
+                throw;
+            }
+        }
+
+        public async Task ChangeStatus(string id, string status)
+        {
+            try
+            {
+                using (var connection = CreateConnection())
+                {
+                    var result = await connection.ExecuteAsync(@"
+                    UPDATE products 
+                    SET `status` = @Status
+                    WHERE Uuid = @uuid
+                    ", new { uuid = id, Status = status });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while updating product status");
                 throw;
             }
         }

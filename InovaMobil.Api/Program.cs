@@ -13,6 +13,7 @@ builder.Services.AddSingleton<IProductBusiness, ProductBusiness>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 builder.Services.AddSingleton<IClientBusiness, ClientBusiness>();
 builder.Services.AddSingleton<IClientRepository, ClientRepository>();
+builder.Services.AddSingleton<ISaleRepository, SalesRepository>();
 
 var app = builder.Build();
 

@@ -6,6 +6,8 @@ namespace InovaMobil.Api.Repositories.Interfaces
     {
         Task<ProductDto?> Create(ProductDto product);
         Task<IEnumerable<ProductDto>?> Get();
+        Task ChangeStatus(string id, string status);
+        Task<ProductDto> GetWithUuid(string id);
     }
 }
 

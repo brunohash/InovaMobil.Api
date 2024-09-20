@@ -24,17 +24,17 @@ public class ProductController : ControllerBase
     {
         if(string.IsNullOrEmpty(product.Name))
         {
-            return BadRequest("O nome do produto precisa ser preenchido");
+            return BadRequest(new { message = "O nome do produto precisa ser preenchido" });
         }
 
         var result = await _productBusiness.CreateProduct(product);
 
         if(result == null || string.IsNullOrEmpty(result.Name))
         {
-            return BadRequest("Não foi possível realizar a criação do produto");
-        }
+            return BadRequest(new { message = "Não foi possível realizar a criação do produto" });
+    }
 
-        return Ok($"Produto criado com sucesso - {result}");
+        return Ok(new { message = $"Produto criado com sucesso - {result}"});
     }
 
     [HttpGet]
